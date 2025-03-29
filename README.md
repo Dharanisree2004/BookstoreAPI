@@ -1,7 +1,7 @@
-# BookstoreAPI
+# Bookstore API
 
 ## Overview
-This is a Spring Boot-based REST API for a Book Store. It provides functionalities for managing books and user authentication (login and signup).
+This is a Spring Boot-based REST API for a Bookstore. It provides functionalities for managing books and user authentication (login and signup).
 
 ---
 
@@ -125,7 +125,7 @@ This is a Spring Boot-based REST API for a Book Store. It provides functionaliti
 - **Request Body:**
   ```json
   {
-    "username": "jABC",
+    "username": "ABC",
     "password": "securepassword"
   }
   ```
@@ -138,10 +138,16 @@ This is a Spring Boot-based REST API for a Book Store. It provides functionaliti
 
 ## Assumptions & Enhancements
 ### Assumptions
-- The API does not implement JWT authentication.
-- Users are identified only by username and password.
+- The API implements JWT authentication for secure access.
+- Users are identified by their username and password.
+- Books can be sorted and filtered based on parameters.
 
+### Enhancements
+- Implemented Pagination for `GET /books`.
+- Added Sorting by price and rating.
+- Filtering books by author, category, and rating.
+- Searching books by title (partial matches).
 
 ### Author
-Developed by **Dharani Sree.M.C**.
+Developed by **Dharani Sree M.C**.
 
