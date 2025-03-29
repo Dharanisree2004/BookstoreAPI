@@ -3,8 +3,6 @@ package com.example.Book.Store.Service;
 
 import com.example.Book.Store.Model.Books;
 import com.example.Book.Store.Repository.BookRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,15 +24,15 @@ public class BooksService {
         return bookRepository.findAll();
     }
 
-    public Page<Books> getAllBooksPaged(Pageable pageable) {
-        return bookRepository.findAll(pageable);
-    }
-
     public Optional<Books> getBookById(Long id) {
         return bookRepository.findById(id);
     }
 
-    public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+    public void deleteBookById(Long id) {
+        if (bookRepository.existsById(id)) {
+            bookRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Book not found with ID: " + id);
+        }
     }
 }
