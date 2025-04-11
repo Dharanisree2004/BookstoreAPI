@@ -6,11 +6,12 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repo') {
+        stage('Clone Repo') { 
             steps {
-                git 'https://github.com/Dharanisree2004/BookstoreAPI.git'
+                git branch: 'main', url: 'https://github.com/Dharanisree2004/BookstoreAPI.git'
             }
         }
+
 
         stage('Build App') {
             steps {
