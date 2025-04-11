@@ -1,5 +1,6 @@
 # Dockerfile
 FROM openjdk:17
-COPY . /app
 WORKDIR /app
-CMD ["java", "-jar", "yourapp.jar"]
+COPY . .
+RUN ./mvnw clean package -DskipTests
+CMD ["java", "-jar", "target/*.jar"]
