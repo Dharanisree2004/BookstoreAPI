@@ -12,22 +12,27 @@ pipeline {
             }
         }
 
-
         stage('Build App') {
             steps {
-                sh './mvnw clean package -DskipTests || mvn clean package -DskipTests'
+                dir('Book-Store') {
+                    sh './mvnw clean package -DskipTests'
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME .'
+                dir('Book-Store') {
+                    sh 'docker build -t $IMAGE_NAME .'
+                }
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                sh 'docker run --rm $IMAGE_NAME'
+                dir('Book-Store') {
+                    sh 'docker run --rm $IMAGE_NAME'
+                }
             }
         }
     }
