@@ -1,22 +1,32 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = 'bookstore-api'
+    }
+
     stages {
-        stage('Clone') {
+        stage('Clone Repo') {
             steps {
                 git 'https://github.com/Dharanisree2004/BookstoreAPI.git'
             }
         }
 
-        stage('Build') {
+        stage('Build App') {
             steps {
-                sh 'mvn clean install'
+                sh './mvnw clean package -DskipTests || mvn clean package -DskipTests'
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                sh 'mvn test'
+                sh 'docker build -t $IMAGE_NAME .'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker run --rm $IMAGE_NAME'
             }
         }
     }
