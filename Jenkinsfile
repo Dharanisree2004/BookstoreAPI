@@ -15,24 +15,20 @@ pipeline {
         stage('Build App') {
             steps {
                 dir('Book-Store') {
-                    sh './mvnw clean package -DskipTests'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                dir('Book-Store') {
-                    sh 'docker build -t $IMAGE_NAME .'
-                }
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                dir('Book-Store') {
-                    sh 'docker run --rm $IMAGE_NAME'
-                }
+                sh 'docker run --rm $IMAGE_NAME'
             }
         }
     }
